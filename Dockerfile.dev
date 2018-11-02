@@ -1,8 +1,10 @@
 FROM node:8-alpine
 
+RUN apk add --no-cache bash
+
 WORKDIR /usr/app/
 
 COPY package*.json ./
 RUN yarn install
 
-CMD ["./node_modules/nodemon/bin/nodemon.js", "--inspect=0.0.0.0:9229", "index.js"]
+CMD ["./scripts/wait-for-it.sh", "rabbitmq:5672", "--", "./node_modules/nodemon/bin/nodemon.js", "--inspect=0.0.0.0:9229", "index.js"]
