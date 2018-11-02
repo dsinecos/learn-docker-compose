@@ -8,7 +8,9 @@
   },
   "author": "Divyanshu Singh <dsinecos@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "amqplib": "^0.5.2"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "debug": "^4.1.0",
