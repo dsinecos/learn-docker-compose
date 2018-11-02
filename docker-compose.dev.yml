@@ -1,0 +1,28 @@
+version: '3'
+services:
+  rabbitmq:
+    image: 'rabbitmq:3.6.6-management'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./data:/var/lib/rabbitmq
+      - ./data/logs:/var/log/rabbitmq
+    hostname: rabbit
+  node-application:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "9229:9229"
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+    command: ["yarn", "run", "tests"]
